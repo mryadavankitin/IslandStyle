@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  sku_identifier:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sku_identifier:latest
+    container_name: "sku_identifier"
+    environment:
+      - host=localhost
+      - database=styleisland
+      - user=styleisland
+      - password=Ga@5xIfjxWVFbmVT
+      - port=3306
+      - SYSTEM_PORT=8080
+    network_mode: host

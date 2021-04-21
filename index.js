@@ -3,23 +3,23 @@ const mysql = require('mysql')
 
 //pass: Ga@5xIfjxWVFbmVT
 //create connection
-// const db = mysql.createConnection({
-//     host: process.env.host,
-//     user: process.env.user,
-//     password: process.env.password,
-//     database : process.env.database,
-//     port:process.env.port
-
-// })
-
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "styleisland",
-    password: "Ga@5xIfjxWVFbmVT",
-    database : "styleisland",
-    port:"3306"
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database : process.env.database,
+    port:process.env.port
 
 })
+
+// const db = mysql.createConnection({
+//     host: "localhost",
+//     user: "styleisland",
+//     password: "Ga@5xIfjxWVFbmVT",
+//     database : "styleisland",
+//     port:"3306"
+
+// })
 
 //connect to mySQL
 
@@ -70,6 +70,32 @@ app.get("/getskudetails",(req,res) => {
     });
 });
 
+
+//Fectch Inventory Details
+
+
+app.get("/getinventory",(req,res) => {
+
+console.log("hello inventory", req.query);
+    var skuString = "'" +  req.query.skuID + "'";
+    var dbQyery = "SELECT " + req.query.size + " from productinventory where sku=" + skuString;
+    // var dbQyery = "SELECT" + "${ req.query.size }" + "from productinventory where sku= ";
+    console.log("hello query",dbQyery);
+
+    db.query(dbQyery, (err, rows) => {
+        if(err) throw err;
+        console.log('The data from users table are: \n', rows);
+        // db.end();
+        if(rows.length >0){
+            return res.status(200).send(rows)
+
+        }
+        else{
+            return res.status(404).send("no data found")
+        }
+
+    });
+});
 const port = process.env.SYSTEM_PORT || 8080
 
 app.listen(port, () => {

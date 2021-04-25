@@ -4,14 +4,16 @@ const mysql = require('mysql')
 //pass: Ga@5xIfjxWVFbmVT
 //create connection
 
-// const db = mysql.createConnection({
-//     host: process.env.host,
-//     user: process.env.user,
-//     password: process.env.password,
-//     database : process.env.database,
-//     port:process.env.port
+var db = mysql.createConnection({
+    host: process.env.host,
+    user: process.env.user,
+    password: process.env.password,
+    database : process.env.database,
+    port:process.env.port,
+    connectionLimit : 9
 
-// })
+
+});
 
 // let pool = mysql.createPool(db);
 
@@ -32,14 +34,14 @@ const mysql = require('mysql')
 
 // })
 
-var db  = mysql.createPool({
-    connectionLimit : 10,
-    host: "localhost",
-    user: "styleisland",
-    password: "Ga@5xIfjxWVFbmVT",
-    database : "styleisland",
-    port:"3306"
-  });
+// var db  = mysql.createPool({
+//     connectionLimit : 10,
+//     host: "localhost",
+//     user: "styleisland",
+//     password: "Ga@5xIfjxWVFbmVT",
+//     database : "styleisland",
+//     port:"3306"
+//   });
   
 
 
